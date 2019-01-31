@@ -2,3 +2,5 @@ build/*
 dist/*
 easydarkfigs.egg-info/*
 makefile
+examples/*.jpg
+examples/figures/
