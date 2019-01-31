@@ -16,8 +16,8 @@ import matplotlib.pyplot as plt
 @magics_class
 class FigureMagics(Magics):
     
-    darkstyle = 'cook-dark'
-    lightstyle = 'cook-light'
+    darkstyle = 'easy-dark'
+    lightstyle = 'easy-light'
     darkfigdir = 'figures_dark/'
     lightfigdir = 'figures/'
     
