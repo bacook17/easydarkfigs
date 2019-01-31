@@ -49,7 +49,7 @@ setup(
     long_description=long_description,
     long_description_content_type='text/markdown',
     keywords="matplotlib, dark figures",
-    url="https://github.com/bacook17/DnD4py/",
+    url="https://github.com/bacook17/easydarkfigs/",
     classifiers=[
         "Intended Audience :: Science/Research",
         "Programming Language :: Python",
