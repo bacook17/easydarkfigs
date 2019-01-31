@@ -4,3 +4,4 @@ easydarkfigs.egg-info/*
 makefile
 examples/*.jpg
 examples/figures/
+examples/.ipynb_checkpoints/
