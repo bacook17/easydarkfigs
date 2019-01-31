@@ -51,7 +51,7 @@ setup(
     keywords="matplotlib, dark figures",
     url="https://github.com/bacook17/DnD4py/",
     classifiers=[
-        "Indended Audience :: Science/Research",
+        "Intended Audience :: Science/Research",
         "Programming Language :: Python",
         "Topic :: Software Development :: Libraries :: Python Modules",
         "Topic :: Scientific/Engineering :: Visualization",
