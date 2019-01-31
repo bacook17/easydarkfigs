@@ -1,0 +1,38 @@
+## Light Background Settings
+axes.edgecolor : k
+axes.facecolor : w
+axes.labelcolor : k
+figure.edgecolor : w
+figure.facecolor : w
+grid.color : k
+lines.color : k
+patch.edgecolor : k
+savefig.edgecolor : w
+savefig.facecolor : w
+text.color : k
+xtick.color : k
+ytick.color : k
+
+## General Settings
+image.origin : lower
+savefig.format : pdf
+savefig.bbox : tight
+savefig.pad_inches : 0.1
+figure.figsize : 12.8, 8.8
+axes.labelsize: 14
+axes.titlesize: 16
+grid.linewidth: 1.6
+legend.fontsize: 14.0
+lines.linewidth: 2.0
+lines.markeredgewidth: 2.0
+lines.markersize: 12
+patch.linewidth: 2.0
+xtick.labelsize: 10.0
+xtick.major.pad: 8
+xtick.major.width: 1.6
+xtick.minor.width: 0.8
+ytick.labelsize: 10.0
+ytick.major.pad: 8
+ytick.major.width: 1.6
+ytick.minor.width: 0.8
+axes.prop_cycle :  cycler('linestyle', ['-', '--', ':', '-.']) * cycler('color', ['0072b2', '009e73', 'd55e00', 'cc79a7', 'f0e442', '56b4e9', '0072b2', '009e73', 'd55e00', 'cc79a7'])
