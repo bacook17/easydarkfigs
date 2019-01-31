@@ -18,8 +18,9 @@ class FigureMagics(Magics):
     
     darkstyle = 'easy-dark'
     lightstyle = 'easy-light'
-    darkfigdir = 'figures_dark/'
-    lightfigdir = 'figures/'
+    darkfigdir = ''
+    lightfigdir = ''
+    darkappend = '_dark'
     
     @line_magic
     def set_darkstyle(self, line):
@@ -52,6 +53,14 @@ class FigureMagics(Magics):
     @line_magic
     def get_lightfigdir(self, line):
         return self.lightfigdir
+
+    @line_magic
+    def set_darkappend(self, line):
+        self.dark_append = line
+    
+    @line_magic
+    def get_darkappend(self, line):
+        return self.darkappend
         
     @cell_magic
     @magic_arguments.magic_arguments()
@@ -67,15 +76,21 @@ class FigureMagics(Magics):
             Dark/Light figure will be saved in two seperate directories
         """
         args = magic_arguments.parse_argstring(self.savefig_dark_light, line)
-        for i,s,d in zip([0,1], [self.lightstyle, self.darkstyle], [self.lightfigdir, self.darkfigdir]):
-            with plt.style.context((s)):
-                self.shell.ex(cell)
-                if i == 0:
-                    stderr.write('Saving light figure as %s\n' % (d+args.figname))
-                else:
-                    stderr.write('Saving dark figure as %s\n' % (d+args.figname))
-                plt.savefig(d + args.figname)
-                
+        light_figname = self.lightfigdir + args.figname
+        if '.' in args.figname:
+            pre, _, post = args.figname.rpartition('.')
+            dark_figname = self.darkfigdir + pre + self.darkappend + '.' + post
+        else:
+            dark_figname = self.darkfigdir + args.figname + self.darkappend
+        with plt.style.context((self.lightstyle)):
+            self.shell.ex(cell)
+            stderr.write('Saving light figure as %s\n' % (light_figname))
+            plt.savefig(light_figname)
+        with plt.style.context((self.darkstyle)):
+            self.shell.ex(cell)
+            stderr.write('Saving dark figure as %s\n' % (dark_figname))
+            plt.savefig(dark_figname)
+
     @cell_magic
     @magic_arguments.magic_arguments()
     @magic_arguments.argument('figname', help='Base Figure Name to save to')
@@ -90,11 +105,15 @@ class FigureMagics(Magics):
             Will be saved in directory for dark figures
         """
         args = magic_arguments.parse_argstring(self.savefig_dark, line)
-        d = self.darkfigdir
+        if '.' in args.figname:
+            pre, _, post = args.figname.rpartition('.')
+            dark_figname = self.darkfigdir + pre + self.darkappend + '.' + post
+        else:
+            dark_figname = self.darkfigdir + args.figname + self.darkappend
         with plt.style.context((self.darkstyle)):
             self.shell.ex(cell)
-            stderr.write('Saving dark figure as %s\n' % (d+args.figname))
-            plt.savefig(d + args.figname)
+            stderr.write('Saving dark figure as %s\n' % (dark_figname))
+            plt.savefig(dark_figname)
             
     @cell_magic
     @magic_arguments.magic_arguments()
@@ -110,11 +129,11 @@ class FigureMagics(Magics):
             Will be saved in directory for light figures
         """
         args = magic_arguments.parse_argstring(self.savefig_light, line)
-        d = self.lightfigdir
+        light_figname = self.lightfigdir + args.figname
         with plt.style.context((self.lightstyle)):
             self.shell.ex(cell)
-            stderr.write('Saving light figure as %s\n' % (d+args.figname))
-            plt.savefig(d + args.figname)
+            stderr.write('Saving light figure as %s\n' % (light_figname))
+            plt.savefig(light_figname)
 
             
 # This loads the functions above into your running iPython instance
