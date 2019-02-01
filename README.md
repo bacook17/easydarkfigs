@@ -38,3 +38,14 @@ To change the default figure save location or styles to use:
 
 %set_lightfigdir my/dir/
 ```
+
+The code also makes a boolean variable `is_dark` available during execution, the value of which changes depending on which version of the plot is being created.
+
+```python
+%%savefig_dark_light figname.ext
+if is_dark:
+    title = 'This Is A Dark Plot'
+else:
+    title = 'This Is A Light Plot'
+plt.title(title)
+```
