@@ -83,10 +83,12 @@ class FigureMagics(Magics):
         else:
             dark_figname = self.darkfigdir + args.figname + self.darkappend
         with plt.style.context((self.lightstyle)):
+            self.shell.user_ns['is_dark'] = False
             self.shell.ex(cell)
             stderr.write('Saving light figure as %s\n' % (light_figname))
             plt.savefig(light_figname)
         with plt.style.context((self.darkstyle)):
+            self.shell.user_ns['is_dark'] = True
             self.shell.ex(cell)
             stderr.write('Saving dark figure as %s\n' % (dark_figname))
             plt.savefig(dark_figname)
@@ -111,6 +113,7 @@ class FigureMagics(Magics):
         else:
             dark_figname = self.darkfigdir + args.figname + self.darkappend
         with plt.style.context((self.darkstyle)):
+            self.shell.user_ns['is_dark'] = True
             self.shell.ex(cell)
             stderr.write('Saving dark figure as %s\n' % (dark_figname))
             plt.savefig(dark_figname)
@@ -131,6 +134,7 @@ class FigureMagics(Magics):
         args = magic_arguments.parse_argstring(self.savefig_light, line)
         light_figname = self.lightfigdir + args.figname
         with plt.style.context((self.lightstyle)):
+            self.shell.user_ns['is_dark'] = False
             self.shell.ex(cell)
             stderr.write('Saving light figure as %s\n' % (light_figname))
             plt.savefig(light_figname)
