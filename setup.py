@@ -32,7 +32,7 @@ with open(os.path.join(here, 'README.md'), 'r') as f:
     long_description = f.read()
 
 # https://stackoverflow.com/questions/35851201/how-can-i-share-matplotlib-style
-BASE_LIBRARY_PATH = os.path.join(mpl.get_data_path(), 'stylelib')
+BASE_LIBRARY_PATH = os.path.join(mpl.get_configdir(), 'stylelib')
 STYLE_PATH = os.path.join(os.getcwd(), 'mplstyles')
 STYLE_EXTENSION = 'mplstyle'
 style_files = glob.glob(os.path.join(STYLE_PATH, "*.%s" % (STYLE_EXTENSION)))
