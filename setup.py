@@ -50,6 +50,7 @@ setup(
     long_description_content_type='text/markdown',
     keywords="matplotlib, dark figures",
     url="https://github.com/bacook17/easydarkfigs/",
+    package_data={'easydarkfigs': ['mplstyles/*.mplstyle']}
     classifiers=[
         "Intended Audience :: Science/Research",
         "Programming Language :: Python",
