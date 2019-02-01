@@ -3,11 +3,13 @@
 import os
 import re
 import codecs
-from setuptools import setup, find_packages
+from setuptools import setup, find_packages, Command
+from setuptools.command.install import install
 import matplotlib as mpl
 import glob
 import os.path
 import shutil
+import sys
 
 
 here = os.path.abspath(os.path.dirname(__file__))
@@ -18,6 +20,14 @@ def read(*parts):
         return fp.read()
 
 
+class CustomInstall(install):
+    """
+    Also copy over the matplotlib files
+    """
+    def run(self):
+        install.run(self)
+
+    
 # https://packaging.python.org/guides/single-sourcing-package-version/
 def find_version(*file_paths):
     version_file = read(*file_paths)
@@ -31,11 +41,6 @@ def find_version(*file_paths):
 with open(os.path.join(here, 'README.md'), 'r') as f:
     long_description = f.read()
 
-# https://stackoverflow.com/questions/35851201/how-can-i-share-matplotlib-style
-BASE_LIBRARY_PATH = os.path.join(mpl.get_configdir(), 'stylelib')
-STYLE_PATH = os.path.join(os.getcwd(), 'mplstyles')
-STYLE_EXTENSION = 'mplstyle'
-style_files = glob.glob(os.path.join(STYLE_PATH, "*.%s" % (STYLE_EXTENSION)))
 
 setup(
     name="easydarkfigs",
@@ -51,6 +56,7 @@ setup(
     keywords="matplotlib, dark figures",
     url="https://github.com/bacook17/easydarkfigs/",
     package_data={'easydarkfigs': ['mplstyles/*.mplstyle']},
+    cmdclass={'install': CustomInstall},
     classifiers=[
         "Intended Audience :: Science/Research",
         "Programming Language :: Python",
@@ -59,6 +65,11 @@ setup(
     ]
 )
 
+# https://stackoverflow.com/questions/35851201/how-can-i-share-matplotlib-style
+BASE_LIBRARY_PATH = os.path.join(mpl.get_configdir(), 'stylelib')
+STYLE_PATH = os.path.join(here, 'easydarkfigs/mplstyles/')
+STYLE_EXTENSION = 'mplstyle'
+style_files = glob.glob(os.path.join(STYLE_PATH, "*.%s" % (STYLE_EXTENSION)))
 for _path_file in style_files:
     _, fname = os.path.split(_path_file)
     dest = os.path.join(BASE_LIBRARY_PATH, fname)
