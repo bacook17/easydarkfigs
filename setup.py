@@ -8,7 +8,6 @@ from setuptools.command.install import install
 import matplotlib as mpl
 import glob
 import os.path
-import shutil
 import sys
 
 
@@ -64,17 +63,3 @@ setup(
         "Topic :: Scientific/Engineering :: Visualization",
     ]
 )
-
-# https://stackoverflow.com/questions/35851201/how-can-i-share-matplotlib-style
-BASE_LIBRARY_PATH = os.path.join(mpl.get_configdir(), 'stylelib')
-STYLE_PATH = os.path.join(here, 'easydarkfigs/mplstyles/')
-STYLE_EXTENSION = 'mplstyle'
-style_files = glob.glob(os.path.join(STYLE_PATH, "*.%s" % (STYLE_EXTENSION)))
-for _path_file in style_files:
-    _, fname = os.path.split(_path_file)
-    dest = os.path.join(BASE_LIBRARY_PATH, fname)
-    if not os.path.isfile(dest):
-        shutil.copy(_path_file, dest)
-        print("%s style installed" % (fname))
-    else:
-        print("%s style already exists" % (fname))
