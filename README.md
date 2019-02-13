@@ -7,6 +7,12 @@
 pip install easydarkfigs
 ```
 
+### Important Installation Note
+
+`easydarkfigs` comes packaged with two custom `matplotlib` style files. The first time you import `easydarkfigs`, it will copy those files over to your local `matplotlib` style library, but you __must then restart your notebook kernel__ or `matplotlib` will not recognize they are there. This is only a one-time issue.
+
+If anyone knows a good way of solving this issue (such that the files are copied over on `pip install`) please see the Issues list to this Repo.
+
 ## Usage
 
 Within an active iPython or Jupyter environment:
